@@ -1,0 +1,44 @@
+GIT
+  remote: git@github.com:zakrevitz/yomu.git
+  revision: 34e1502f5c53c3768d2dfbe852bc330c6157fa9a
+  branch: update-mime-type
+  specs:
+    yomu (0.2.5)
+      json (~> 1.8)
+      mime-types
+
+PATH
+  remote: .
+  specs:
+    word_counter (0.0.1)
+      yomu (~> 0.2.5)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    diff-lcs (1.2.5)
+    json (1.8.3)
+    mime-types (3.1)
+      mime-types-data (~> 3.2015)
+    mime-types-data (3.2016.0521)
+    rspec (3.4.0)
+      rspec-core (~> 3.4.0)
+      rspec-expectations (~> 3.4.0)
+      rspec-mocks (~> 3.4.0)
+    rspec-core (3.4.4)
+      rspec-support (~> 3.4.0)
+    rspec-expectations (3.4.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.4.0)
+    rspec-mocks (3.4.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.4.0)
+    rspec-support (3.4.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  rspec (~> 3.4)
+  word_counter!
+  yomu!
