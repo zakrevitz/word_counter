@@ -41,4 +41,11 @@ describe WordCounter::Base do
     word_counter = WordCounter::Base.from_text(text)
     expect(word_counter.words).to eq 11
   end
+
+  it "should count words in chineese txt file" do
+    text = ""
+    word_counter = WordCounter::Base.from_text(text)
+    expect(word_counter.words).to eq 0
+    expect(word_counter.errors[:text]).to include('Text is empty')
+  end
 end
