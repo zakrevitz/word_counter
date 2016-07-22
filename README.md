@@ -31,6 +31,13 @@ Supported formats
 
 For the complete list of supported formats, please visit the Apache Tika [Supported Document Formats page](http://tika.apache.org/1.13/formats.html).
 
+Average time to count word
+-----
+- pdf file with 10138 words ≈6 sec.
+- rtf file with 29790 words ≈5 sec.
+- doc/docx file with 150972 words ≈4,5 sec
+- txt file with 139860 words ≈1.7 sec
+
 Testing
 -----
 Gem uses Rspec for testing and provides several test files:
