@@ -15,5 +15,7 @@ Gem::Specification.new do |s|
   s.test_files = Dir["{spec}/**/*"]
   s.require_paths = ["lib"]
   s.add_runtime_dependency('yomu', '~> 0.2.5')
+  s.add_runtime_dependency('sanitize', '~> 4.2')
   s.add_development_dependency('rspec', '~> 3.4')
+  s.add_development_dependency('webmock', '~> 2.1')
 end
