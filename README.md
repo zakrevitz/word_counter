@@ -21,6 +21,13 @@ WordCounter::Base.from_file('path_to_your_file').words
 ```ruby
 WordCounter::Base.from_text('insert text here').words
 ```
+Count words on site
+-----
+Currently gem supports counting words on desired site. Be advised that this is experimental feature. If ```words == 0``` check ```errors``` attribute
+#### Usage
+```ruby
+WordCounter::Url.from_url('insert url here').words
+```
 Supported formats
 -----
 - Microsoft Office OLE 2 and Office Open XML Formats (.doc, .docx, .xls, .xlsx, .ppt, .pptx)
