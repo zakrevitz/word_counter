@@ -23,7 +23,8 @@ WordCounter::Base.from_text('insert text here').words
 ```
 Count words on site
 -----
-Currently gem supports counting words on desired site. Be advised that this is experimental feature. If ```words == 0``` check ```errors``` attribute
+Currently gem supports counting words on desired site. Be advised that this is experimental feature. If ```words == 0``` check ```errors``` attribute. Url must be in format ```http(s)://someurl.com```  
+Provided link can contain one redirection.
 #### Usage
 ```ruby
 WordCounter::Url.from_url('insert url here').words

@@ -15,17 +15,15 @@ module WordCounter
       end
 
       def from_url(url)
-        raise InvalidUrl, 'Invalid url. Re-check entered value!' if url.empty?
-        # begin
-          http = Net::HTTP.new url, 80
-          request = Net::HTTP::Get.new '/'
-          response = http.request request
+        begin
+          raise InvalidUrl, 'Invalid url. Re-check entered value!' unless valid_url?(url)
+          response = fetch(url)
           raise InvalidUrl, 'Invalid url. Re-check entered value!' unless response_valid?(response)
           word_counter = from_text(sanitize_html(response.body))
-        # rescue Exception => e
-          # word_counter = new
-          # word_counter.errors = e
-        # end
+        rescue Exception => e
+          word_counter = new
+          word_counter.errors = e
+        end
         word_counter
       end
 
@@ -41,7 +39,29 @@ module WordCounter
       end
 
       def response_valid?(response)
-        response.content_type == 'text/html' && response.code.to_i == 200
+        WordCounter::Utils::Validations.valid_response?(response)
+      end
+
+      def valid_url?(url)
+        return false if url.empty?
+        WordCounter::Utils::Validations.valid_url?(url)
+      end
+
+      def fetch(uri_str, limit = 1)
+        # TODO: Choose better error handling
+        raise TooManyRedirectsError, 'Too many redirects!' if limit < 0
+
+        response = Net::HTTP.get_response(URI(uri_str))
+
+        case response
+        when Net::HTTPSuccess then
+          response
+        when Net::HTTPRedirection then
+          location = response['location']
+          fetch(location, limit - 1)
+        else
+          response.value
+        end
       end
     end
   end
