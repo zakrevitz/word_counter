@@ -3,7 +3,7 @@ module Webmocks
     stub_request(:get, 'http://example.com').
           to_return(status: 200,
                     body: local_fixture('example_com.html'),
-                    headers: {'Content-Type' => 'text/html'})
+                    headers: {'Content-Type' => 'text/html; charset=utf-8'})
   end
 
   def stub_redirects_failure
@@ -27,7 +27,7 @@ module Webmocks
     stub_request(:get, 'http://redirect.success2.com').
           to_return(status: 200,
                     body: local_fixture('example_com.html'),
-                    headers: {'Content-Type' => 'text/html'})
+                    headers: {'Content-Type' => 'text/html; charset=utf-8'})
   end
 end
 

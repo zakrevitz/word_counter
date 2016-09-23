@@ -13,15 +13,15 @@ module WordCounter
 
     class << self
       def from_file(filepath)
-        raise NoFileError, "File does not exist!" unless File.exist?(filepath)
         begin
           yomu = Yomu.new filepath
-          if yomu.mimetype.content_type == 'text/plain'
-            word_counter = from_text(File.read(filepath).force_encoding("UTF-8"))
-          else
+          # TODO: Do something with large TXT files
+          # if yomu.mimetype.content_type == 'text/plain'
+            # word_counter = from_text(File.read(filepath).force_encoding("UTF-8"))
+          # else
             yomu.text.force_encoding("UTF-8")
             word_counter = from_text(yomu.text)
-          end
+          # end
         rescue Exception => e
           word_counter = new
           word_counter.errors = e
