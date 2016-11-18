@@ -21,7 +21,6 @@ module WordCounter
           # else
             yomu.text.force_encoding("UTF-8")
             word_counter = from_text(yomu.text)
-          # end
         rescue Exception => e
           word_counter = new
           word_counter.errors = e
@@ -45,16 +44,27 @@ module WordCounter
     end
 
     def count_words(text)
-      @words = sanitize_and_count(text) + 1
+      clean_text = sanitize(text)
+      @words = count(clean_text)
+      @words += 1 if clean_text.length > 0
+      @words
     end
 
     private
 
-    def sanitize_and_count(text)
+    def sanitize(text)
       ## Firstly remove all special-whitespaces
       ## Secondly convert multiply whitespaces into one
       ## Thirdly, fourthly - remove trailing whitespaces
-      text.gsub(/[\r\n\t,，。()-.»«]/, SPLITTER).gsub(/(\s|\u00A0){2,}/, SPLITTER).gsub(/^\s*/, REMOVE_SPACE).gsub(/\s*$/, REMOVE_SPACE).count(SPLITTER)
+
+      text.gsub(/[\u2000-\u2013\u2015-\u2018\u201A-\u206F\u2E00-\u2E7F\\!"#$%&\(\)*+\r\n\t,\.\/:;<=>?\[\]^_{|}~\uFF0C\u3002]+/, SPLITTER)
+          .gsub(/(\s|\u00A0){2,}/, SPLITTER)
+          .gsub(/^\s*/, REMOVE_SPACE)
+          .gsub(/\s*$/, REMOVE_SPACE)
+    end
+
+    def count(text)
+      text.count(SPLITTER)
     end
   end
 end

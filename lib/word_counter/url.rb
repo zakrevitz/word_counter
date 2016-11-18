@@ -30,12 +30,7 @@ module WordCounter
 
       private
       def sanitize_html(html)
-        Sanitize.fragment(html,
-          remove_contents: ['style', 'script'],
-          elements: ['meta'],
-          attributes: { 'meta' => ['content'] },
-          transformers: @@meta_whitelist_transformer
-          )
+        WordCounter::Utils::Sanitizer.sanitize_html(html)
       end
 
       def response_valid?(response)
